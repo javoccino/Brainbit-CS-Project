@@ -13,6 +13,12 @@ import pickle
   #  movie1 = []
 #}
 
+UserInfo = {
+  "Username": "TESTING",
+  "clip_name" : "movie.mp4",
+  "movie_play_data": [],
+}
+
 
 def on_sensor_state_changed(sensor, state):
     logger.debug('Sensor {0} is {1}'.format(sensor.Name, state))
@@ -20,6 +26,9 @@ def on_sensor_state_changed(sensor, state):
 def on_brain_bit_signal_data_received(sensor, data):
     
     logger.debug(data)
+    
+    UserInfo["movie_play_data"].append(data) #add to the list of the UserInfo 
+
    # with open('data.pkl' , 'wb') as f:
        # pickle.dump(data . f)
         #f.close()
