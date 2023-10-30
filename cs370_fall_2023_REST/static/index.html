@@ -13,12 +13,22 @@
 					//this gets called when browser receives response from server
 					console.log(data);
 				}, "json").fail( function(response) {
+					stop();
 					//this gets called if the server throws an error
 					console.log("error");
 				console.log(response);});
-				$.post("/open_api/play_movie" , function(data , textStatus){
-					console.log("stop_Movie.py is called")
-				})
+		}
+
+		function stop(){
+			$.post("/open_api/stop_movie", { "data":"somedata", "any":"data"},
+				function(data, textStatus) {
+					//this gets called when browser receives response from server
+					console.log(data);
+					console.log("Stop Called")
+				}, "json").fail( function(response) {
+					//this gets called if the server throws an error
+					console.log("error");
+				console.log(response);});
 		}
 	</script>
 
@@ -33,6 +43,11 @@
 		video.addEventListener("play", (event) => {
 			play_start();
 		});
+
+		video.addEventListener("ended", (event) => {
+			stop();
+		});
+
 	</script>
 
     </body>
