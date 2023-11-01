@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+Signup
+{% endblock %}
+
+{% block container %}
+<form method="post">
+    <h1> Register your Account </h1>
+    <div>
+        <p> Please enter your email and desired password below to create your account!</p>
+        <hr>
+
+        <label for = "username"> <b> Username </b></label>
+        <input type = "text" placeholder = "Enter your username here" id="username"  name="username" required>
+
+        <br>
+
+        <label for = "password"> <b> Password </b></label>
+        <input type = "password" placeholder = "Enter password here" id = "password"  name="password" required>
+
+        <br>
+
+        <label for = "rPassword"><b> Confirm Password </b></label>
+        <input type = "password" placeholder = "Confirm password here" id = "rpassword" name="rpassword" required>
+        <hr>
+
+        <button type = "submit" class = "regbutton"> Register account </button>
+        <hr>
+    </div>
+</form>
+{% endblock %}
