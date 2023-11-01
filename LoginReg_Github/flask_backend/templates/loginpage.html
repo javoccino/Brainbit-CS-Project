@@ -1,38 +1,27 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <title> Log in to your account </title>
-        <meta charset = "utf-8">
-        <link rel = "stylesheet" href = "loginpage.css">
-    </head>
-    <body>
-        <h1> Account Login</h1>
-        
-        <form id = login action = " ">
+{% extends "base.html" %}
+{% block title %}
+Login
+{% endblock %}
 
-            <div class = "avatarcontainer">
-                <img src = "brain.png" alt = "Avatar" class = "avatar">
-            </div>
+{% block container %}
+<form method="post">
+    <h1> Already got a brain? Login! </h1>
+    <div>
+        <p> Please enter your username and password!</p>
+        <hr>
 
-            <div class = "loginform">
-                <label for = "Email"> <b> Email </b></label>
-                <input type = "text" placeholder = "Enter email" name = "Email" required>
+        <label for = "username"> <b> Username </b></label>
+        <input type = "text" placeholder = "Enter your username here" id="username"  name="username" required>
 
-                <label for = "pword"> <b> Password </b></label>
-                <input type = "password" placeholder = "Enter Password" name = "pword" required>
+        <br>
 
-                <button type = "submit" class = "loginbutton"> Login </button>
+        <label for = "password"> <b> Password </b></label>
+        <input type = "password" placeholder = "Enter password here" id = "password"  name="password" required>
 
-                <label>
-                    <input type = "checkbox" checked = "checked" name = rememberme> Remember me
-                </label>
-                <hr>
-            </div>
-            <div class = "pagebottom">
-                <button type = "button" class = "cancel"> Cancel </button>
-                <span class = "reg"> Don't have an account? Make one <a href = "accountregister.html"> here! </a> </span>
-                <span class = "forgot"> <a href = "#" > I forgot my password. </a></span>
-            </div>
-        </form>
-    </body>
-</html>
+        <hr>
+
+        <button type = "submit" class = "regbutton"> Login </button>
+        <hr>
+    </div>
+</form>
+{% endblock %}

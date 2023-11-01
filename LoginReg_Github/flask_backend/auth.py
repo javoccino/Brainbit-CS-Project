@@ -6,8 +6,8 @@ testing = 'here'
 
 @auth.route('/login',methods=['POST','GET'])
 def login():
-    data = request.form
-    print(data)
+    #data = request.form
+    #print(data)
     return render_template("loginpage.html")
 
 @auth.route('/logout')
@@ -25,5 +25,5 @@ def signup():
             flash('Wrong password', category='error')
         else:
             flash('Account has been created!', category='success')
-    return render_template("accountregister.html", username,password)
+    return render_template("accountregister.html")
 
