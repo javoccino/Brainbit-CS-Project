@@ -20,10 +20,5 @@ def signup():
         username = request.form.get('username')
         password = request.form.get('password')
         rpassword = request.form.get('rpassword')
-    
-        if password != rpassword:
-            flash('Wrong password', category='error')
-        else:
-            flash('Account has been created!', category='success')
     return render_template("accountregister.html")
 

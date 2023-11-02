@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block container %}
+    <head>
+		<title>370 project</title>
+	     <script src="https://code.jquery.com/jquery-3.6.0.js" 
+		     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+		</script>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+		<header>
+			<h1>Brain Reading</h1>
+		</header>
+		<main>
+			<div class="row">
+				<div class="video-box">
+					<video id="video" width="1280" height="720">
+						<source src="{{ url_for('static', filename='movie.mp4') }}" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+				<div class="container">
+					<div class="verticle-center">
+						<button class="button" onclick="userPlay()">Play Video</button>
+						<button class="button button2" onclick="userStop()">Stop Video</button>
+					</div>
+				</div>
+			</div>
+		</main>
+	<script>
+		let vid = document.getElementById("video"); 
+		function play_start(){
+			$.post("/open_api/play_movie", { "data":"somedata", "any":"data"},
+				function(data, textStatus) {
+					//this gets called when browser receives response from server
+					console.log(data);
+				}, "json").fail( function(response) {
+					stop();
+					//this gets called if the server throws an error
+					console.log("error");
+				console.log(response);});
+		}
+		function stop(){
+			$.post("/open_api/stop_movie", { "data":"somedata", "any":"data"},
+				function(data, textStatus) {
+					//this gets called when browser receives response from server
+					console.log(data);
+					console.log("Stop Called")
+				}, "json").fail( function(response) {
+					//this gets called if the server throws an error
+					console.log("error");
+				console.log(response);});
+		}
+		function userPlay() {
+			vid.play();  
+		  	play_start();
+		}
+		function userStop() {
+			vid.pause(); 
+			stop();
+		  	alert("Ending connection...");
+		}
+
+		video.addEventListener("ended", (event) => {
+			stop();
+		});
+	</script>
+    </body>
+	{% endblock %}
+
+

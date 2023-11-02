@@ -43,7 +43,25 @@ def init_new_env():
 #So.. we redirect to the endpoint we want to load the base page
 @app.route('/') #endpoint
 def index():
-    return redirect('/static/index.html')
+    return render_template("index.html")
+
+@app.route('/login',methods=['POST','GET'])
+def login():
+    #data = request.form
+    #print(data)
+    return render_template("loginpage.html")
+
+@app.route('/logout')
+def logout():
+    return render_template()
+
+@app.route('/signup',methods=['POST','GET'])
+def signup():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        rpassword = request.form.get('rpassword')
+    return render_template("accountregister.html")
 
 
 @app.route("/secure_api/<proc_name>",methods=['GET', 'POST'])
