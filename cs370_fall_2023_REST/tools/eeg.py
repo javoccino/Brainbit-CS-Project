@@ -2,12 +2,12 @@ from neurosdk.scanner import Scanner
 from neurosdk.sensor import Sensor
 from neurosdk.brainbit_sensor import BrainBitSensor
 from neurosdk.cmn_types import *
-from LoginReg_Github.flask_backend import auth 
+#from LoginReg_Github.flask_backend import auth 
 from tools.logging import logger   
 
 
-t1, t2, t3 = auth.signup()
-print(t1,t2,t3)
+#t1, t2, t3 = auth.signup()
+#print(t1,t2,t3)
 
 #doing all this a the "module level" in "Demo" server mode it will work fine :)
 
