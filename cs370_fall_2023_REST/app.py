@@ -47,7 +47,7 @@ def index():
 
 @app.route('/login',methods=['POST','GET'])
 def login():
-    #data = request.form
+    g.data = request.form
     #print(data)
     return render_template("loginpage.html")
 

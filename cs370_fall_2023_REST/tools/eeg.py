@@ -4,7 +4,8 @@ from neurosdk.brainbit_sensor import BrainBitSensor
 from neurosdk.cmn_types import *
 #from LoginReg_Github.flask_backend import auth 
 from tools.logging import logger   
-
+#from flask import Flask,g
+#from app import login
 
 #t1, t2, t3 = auth.signup()
 #print(t1,t2,t3)
@@ -16,6 +17,7 @@ def on_sensor_state_changed(sensor, state):
 
 def on_brain_bit_signal_data_received(sensor, data):
     logger.debug(data)
+    
 
 logger.debug("Create Headband Scanner")
 gl_scanner = Scanner([SensorFamily.SensorLEBrainBit])
