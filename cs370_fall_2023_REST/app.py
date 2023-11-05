@@ -1,6 +1,8 @@
 from flask import Flask,render_template,request, redirect, url_for, g
 from flask_json import FlaskJSON, JsonError, json_response, as_json
+from tools.eeg import store_signup
 import jwt
+
 
 import sys
 import datetime
@@ -43,11 +45,11 @@ def init_new_env():
 #So.. we redirect to the endpoint we want to load the base page
 @app.route('/') #endpoint
 def index():
-    return render_template("index.html")
+    return render_template("loginpage.html")
 
 @app.route('/login',methods=['POST','GET'])
 def login():
-    g.data = request.form
+    #g.data = request.form
     #print(data)
     return render_template("loginpage.html")
 
@@ -61,6 +63,11 @@ def signup():
         username = request.form.get('username')
         password = request.form.get('password')
         rpassword = request.form.get('rpassword')
+
+        print(username,password,rpassword)
+        check = store_signup(username,password, rpassword)
+        print(check)
+
     return render_template("accountregister.html")
 
 
