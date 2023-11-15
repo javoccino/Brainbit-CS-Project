@@ -43,15 +43,30 @@ def init_new_env():
 
 #This gets executed by default by the browser if no page is specified
 #So.. we redirect to the endpoint we want to load the base page
-@app.route('/') #endpoint
+@app.route('/',methods=['POST','GET']) #endpoint
 def index():
-    return render_template("loginpage.html")
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password') 
+        return redirect(url_for('user', usr = username))
+    else:
+        return render_template("loginpage.html")
+
+
 
 @app.route('/login',methods=['POST','GET'])
 def login():
-    #g.data = request.form
-    #print(data)
-    return render_template("loginpage.html")
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password') 
+        return redirect(url_for('user', usr = username))
+    else:
+        return render_template("loginpage.html")
+        
+@app.route('/<usr>')
+def user(usr):
+    return redirect("/static/index.html")
+
 
 @app.route('/logout')
 def logout():
@@ -67,8 +82,9 @@ def signup():
         print(username,password,rpassword)
         check = store_signup(username,password, rpassword)
         print(check)
-
-    return render_template("accountregister.html")
+        return render_template("loginpage.html")
+    else:
+        return render_template("accountregister.html")
 
 
 @app.route("/secure_api/<proc_name>",methods=['GET', 'POST'])

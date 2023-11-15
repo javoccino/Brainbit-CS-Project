@@ -1,15 +1,11 @@
-{% extends "base.html" %}
-{% block title %}
-Home
-{% endblock %}
-
-{% block container %}
+<!DOCTYPE html>
+<html>
     <head>
 		<title>370 project</title>
 	     <script src="https://code.jquery.com/jquery-3.6.0.js" 
 		     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
 		</script>
-		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+		<link rel="stylesheet" href="./style.css">
     </head>
     <body>
 		<header>
@@ -19,7 +15,7 @@ Home
 			<div class="row">
 				<div class="video-box">
 					<video id="video" width="1280" height="720">
-						<source src="{{ url_for('static', filename='movie.mp4') }}" type="video/mp4">
+						<source src="movie.mp4" type="video/mp4">
 						Your browser does not support the video tag.
 					</video>
 				</div>
@@ -70,6 +66,4 @@ Home
 		});
 	</script>
     </body>
-	{% endblock %}
-
-
+</html>
