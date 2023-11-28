@@ -5,7 +5,16 @@ from neurosdk.cmn_types import *
 from tools.logging import logger   
 from flask import Flask,g
 import pickle
-#from app import login
+import requests
+import os
+
+API_KEY = os.getenv('googlesheetsapikey') #grabbing the api key from my local machine
+sheet_id = "1a3e1r-aGk1SbDKgs3wYYR_Mjc3OQ-hkEVl47Ll3uqIg" #id of the sheet grabbed from url to create url api call
+range = 'Responses!A1:D100' #sheetname following by ranges to be displayed
+
+#creating the url with sheet_id, range, and apikey to access the sheet that holds all the survey data to be called using request
+url = f'https://sheets.googleapis.com/v4/spreadsheets/{sheet_id}/values/{range}?key={API_KEY}' 
+
 
 UserInfo = {
   "Username": "",
@@ -42,6 +51,15 @@ def store_signup(username, password, rpassword):
             one_data = pickle.load(f) # deserialize using load()
             print(one_data) # print student names
             
+        response = requests.get(url) #stores the Response information from the get request into response
+        print(response)
+        if response.status_code == 200: #.status_code grabs response code, 200 means success
+            data = response.json() #storing json content into data as a dictionary
+            print(data)
+        else:
+            print("fail")
+            
+
         return True
     else:
         return False

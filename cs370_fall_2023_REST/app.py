@@ -2,7 +2,7 @@ from flask import Flask,render_template,request, redirect, url_for, g
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 from tools.eeg import store_signup
 import jwt
-
+import gspread
 
 import sys
 import datetime
