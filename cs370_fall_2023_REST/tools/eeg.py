@@ -22,7 +22,15 @@ def on_sensor_state_changed(sensor, state):
 
 def on_brain_bit_signal_data_received(sensor, data):
     logger.debug(data)
-    
+
+
+def returnpswrd(username):
+    with open("%s_data.pkl" % username, 'rb') as f:  #'testing_data_objects.pkl'
+        userDict = pickle.load(f) # deserialize using load()
+        password = userDict["Password"]
+    return password
+
+
     
     
 def store_signup(username, password, rpassword):
@@ -46,11 +54,6 @@ def store_signup(username, password, rpassword):
     else:
         return False
     
-
-    
-
-
-
 logger.debug("Create Headband Scanner")
 gl_scanner = Scanner([SensorFamily.SensorLEBrainBit])
 gl_sensor = None
