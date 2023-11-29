@@ -30,6 +30,15 @@ def returnpswrd(username):
         password = userDict["Password"]
     return password
 
+def checkUser(username):
+    check = False
+    if username in UserInfo["Username"]:
+        check= True
+        
+    return check 
+
+
+
 
     
     
