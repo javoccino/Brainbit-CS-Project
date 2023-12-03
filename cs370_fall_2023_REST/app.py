@@ -51,24 +51,29 @@ def index():
             return render_template("loginpage.html")
         password = request.form.get('password')
         if password == returnpswrd(username):
+            session['username'] = username
             return redirect("/loggedin")
         else:
             return render_template("loginpage.html")
     return render_template("loginpage.html")
 
-@app.route('/<usr>')
-def user(usr):
-    return redirect('/login')
+#@app.route('/<usr>')
+#def user(usr):
+ #   return redirect('/login')
 
 
 @app.route('/loggedin',methods=['POST','GET'])
 def loggedin():
-    return  redirect("static/index.html")
+    if 'username' in session:
+        username = session.get('username', None)
+        print(f"Current user logged in is: {username}")
+        return  redirect("static/index.html")
 
 @app.route('/logout')
 def logout():
     session.pop('username', None)  #session function that gets rid of the username stored on website, signing them out
     return render_template('loginpage.html') #redirects to the login page
+    #redirect("/index")
 
 @app.route('/signup',methods=['POST','GET'])
 def signup():
@@ -82,7 +87,7 @@ def signup():
         print(check)
         if check == True:
             session['username'] = username
-            return redirect(url_for("loggeduser"))
+            return redirect(url_for("loggedin"))
         else:
             return render_template("accountregister.html")
     else:
