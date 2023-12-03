@@ -47,26 +47,20 @@ def init_new_env():
 def index():
     if request.method == 'POST':
         username = request.form.get('username')
-        password = request.form.get('password') 
-        return redirect(url_for('user', usr = username))
-    else:
-        return render_template("loginpage.html")
+        password = request.form.get('password')
+        if password == returnpswrd(username):
+            return redirect("/loggedin")
+        else:
+            return render_template("loginpage.html")
+    return render_template("loginpage.html")
 
 @app.route('/<usr>')
 def user(usr):
     return redirect('/login')
 
-@app.route('/')
-@app.route('/login',methods=['POST','GET'])
-def login():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
-        if password == returnpswrd(username):
-            return redirect("static/index.html")
-        else:
-            return render_template("loginpage.html")
-    return render_template("loginpage.html")
+@app.route('/loggedin',methods=['POST','GET'])
+def loggedin():
+    return  redirect("static/index.html")
 
 @app.route('/logout')
 def logout():
