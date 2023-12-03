@@ -30,6 +30,16 @@ def returnpswrd(username):
         password = userDict["Password"]
     return password
 
+def checkUser(username):
+    try:
+        with open("%s_data.pkl" % username, 'rb') as f:
+            userDict = pickle.load(f)
+            if username in userDict['Username']:
+                check= True; 
+    except FileNotFoundError:
+        # Handle the case where the file is not found
+        check = False
+    return check
     
 def store_signup(username, password, rpassword):
     result = f"Signup info: {username}, {password}, {rpassword}"
