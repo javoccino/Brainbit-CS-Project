@@ -30,17 +30,6 @@ def returnpswrd(username):
         password = userDict["Password"]
     return password
 
-def checkUser(username):
-    check = False
-    if username in UserInfo["Username"]:
-        check= True
-        
-    return check 
-
-
-
-
-    
     
 def store_signup(username, password, rpassword):
     result = f"Signup info: {username}, {password}, {rpassword}"

@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request, redirect, url_for, g
 from flask_json import FlaskJSON, JsonError, json_response, as_json
-from tools.eeg import store_signup,  returnpswrd , checkUser
+from tools.eeg import store_signup,  returnpswrd 
 import jwt
 
 
@@ -56,14 +56,11 @@ def index():
 def user(usr):
     return redirect('/login')
 
-
+@app.route('/')
 @app.route('/login',methods=['POST','GET'])
 def login():
     if request.method == 'POST':
         username = request.form.get('username')
-        user_exist = checkUser(username)
-        if(user_exist == False):
-             return render_template("loginpage.html")
         password = request.form.get('password')
         if password == returnpswrd(username):
             return redirect("static/index.html")
