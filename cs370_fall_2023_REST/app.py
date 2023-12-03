@@ -74,7 +74,7 @@ def loggeduser():
     else:
         return render_template("loginpage.html") #redirects to loginpage if no current user logged in
     
-@app.route('<usr>')
+@app.route('/<usr>')
 def user(usr): 
     return redirect('login')
 
@@ -96,7 +96,7 @@ def signup():
         print(check)
         if check == True:
             session['username'] = username
-            return redirect(url_for("user"))
+            return redirect(url_for("loggeduser"))
         else:
             return render_template("accountregister.html")
     else:
