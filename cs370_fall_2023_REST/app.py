@@ -71,9 +71,11 @@ def loggedin():
 
 @app.route('/logout')
 def logout():
+    user = session.get('username', None)
+    print(f"{user} has logged out")
     session.pop('username', None)  #session function that gets rid of the username stored on website, signing them out
-    return render_template('loginpage.html') #redirects to the login page
-    #redirect("/index")
+    #return render_template('loginpage.html') #redirects to the login page
+    return redirect(url_for('index'))
 
 @app.route('/signup',methods=['POST','GET'])
 def signup():
