@@ -1,6 +1,6 @@
 from flask import Flask,render_template,request, redirect, url_for, g, session
 from flask_json import FlaskJSON, JsonError, json_response, as_json
-from tools.eeg import store_signup
+from tools.eeg import store_signup,  returnpswrd ,checkUser
 import jwt
 import gspread
 
@@ -47,37 +47,23 @@ def init_new_env():
 def index():
     if request.method == 'POST':
         username = request.form.get('username')
-        password = request.form.get('password') 
-        return redirect(url_for('user', usr = username))
-    else:
-        return render_template("loginpage.html")
+        if(checkUser(username)==False):
+            return render_template("loginpage.html")
+        password = request.form.get('password')
+        if password == returnpswrd(username):
+            return redirect("/loggedin")
+        else:
+            return render_template("loginpage.html")
+    return render_template("loginpage.html")
 
-
-
-@app.route('/login',methods=['POST','GET'])
-def login():
-    if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password') 
-        return redirect(url_for('user', usr = username))
-    else:
-        return render_template("loginpage.html")
-        
-
-
-@app.route('/index')
-def loggeduser():
-    if 'username' in session: #checks if a user is currently logged in
-        username = session.get('username',None) #if no username exist then returns None instead
-        print(f"Current user logged in is: {username}")
-        return redirect('/static/index.html')  #grants access to video page
-    else:
-        return render_template("loginpage.html") #redirects to loginpage if no current user logged in
-    
 @app.route('/<usr>')
-def user(usr): 
-    return redirect('login')
+def user(usr):
+    return redirect('/login')
 
+
+@app.route('/loggedin',methods=['POST','GET'])
+def loggedin():
+    return  redirect("static/index.html")
 
 @app.route('/logout')
 def logout():
