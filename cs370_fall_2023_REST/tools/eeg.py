@@ -5,7 +5,7 @@ from neurosdk.cmn_types import *
 from tools.logging import logger   
 from flask import Flask,g
 import pickle
-import requests
+#import requests
 import os
 
 API_KEY = os.getenv('googlesheetsapikey') #grabbing the api key from my local machine
@@ -43,11 +43,12 @@ def checkUser(username):
     try:
         with open("%s_data.pkl" % username, 'rb') as f:
             userDict = pickle.load(f)
-            if username in userDict['Username']:
+            if username.lower() in userDict['Username']:
                 check= True; 
     except FileNotFoundError:
         # Handle the case where the file is not found
         check = False
+
     return check
     
 def store_signup(username, password, rpassword):

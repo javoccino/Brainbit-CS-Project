@@ -2,7 +2,6 @@ from flask import Flask,render_template,request, redirect, url_for, g, session
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 from tools.eeg import store_signup,  returnpswrd ,checkUser
 import jwt
-import gspread
 
 import sys
 import datetime
@@ -80,7 +79,7 @@ def logout():
 @app.route('/signup',methods=['POST','GET'])
 def signup():
     if request.method == 'POST':
-        username = request.form.get('username')
+        username = request.form.get('username').lower()
         password = request.form.get('password')
         rpassword = request.form.get('rpassword')
 
