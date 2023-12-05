@@ -2,16 +2,19 @@ from neurosdk.scanner import Scanner
 from neurosdk.sensor import Sensor
 from neurosdk.brainbit_sensor import BrainBitSensor
 from neurosdk.cmn_types import *
+import re
 
 from tools.logging import logger   
 
 import pickle
 #doing all this a the "module level" in "Demo" server mode it will work fine :)
 
-#user_data {
- #   username : "me"
-  #  movie1 = []
-#}
+UserInfo = {
+  "Username": "",
+  "Password": "",
+  "clip_name" : "movie.mp4",
+  "movie_play_data": [],
+}
 
 
 def on_sensor_state_changed(sensor, state):
@@ -20,14 +23,62 @@ def on_sensor_state_changed(sensor, state):
 def on_brain_bit_signal_data_received(sensor, data):
     
     logger.debug(data)
-   # with open('data.pkl' , 'wb') as f:
-       # pickle.dump(data . f)
-        #f.close()
+    working_string_data(data)
+   
+def working_string_data(data): 
+    #print("First part")
+    #for x in data:
+    one_data = re.split(", Brain", data)
+    one_data[0] = re.sub("\[", "(", one_data[0])
+    print(one_data[0])
+    UserInfo["movie_play_data"].append(one_data[0])
 
-    #with open('data.pkl' , 'rb') as f:
-        #dataLoaded = pickle.load(f)
-        #print("Pickled" + dataLoaded) 
-    #    user_data[movie1.append(data)]
+def returnpswrd(username):
+    with open("%s_data.pkl" % username, 'rb') as f:  #'testing_data_objects.pkl'
+        userDict = pickle.load(f) # deserialize using load()
+        password = userDict["Password"]
+    return password
+
+def checkUser(username):
+    try:
+        with open("%s_data.pkl" % username, 'rb') as f:
+            userDict = pickle.load(f)
+            if username in userDict['Username']:
+                check= True; 
+    except FileNotFoundError:
+        # Handle the case where the file is not found
+        check = False
+    return check
+
+def store_signup(username, password, rpassword):
+    result = f"Signup info: {username}, {password}, {rpassword}"
+    if(password == rpassword):
+        UserInfo["Username"] = username
+        UserInfo["Password"] = password
+        print(UserInfo)
+
+        with open("%s_data.pkl" % UserInfo["Username"], 'wb') as f:  # open pkl file
+            pickle.dump(UserInfo, f) # serialize the list
+            f.close()
+
+        print("\n-------------Printing plk-----------------------\n") #to see if the pkl works
+
+        with open("%s_data.pkl" % UserInfo["Username"], 'rb') as f:  #'testing_data_objects.pkl'
+            one_data = pickle.load(f) # deserialize using load()
+            print(one_data) # print student names
+
+        #response = requests.get(url) #stores the Response information from the get request into response
+        #print(response)
+        #if response.status_code == 200: #.status_code grabs response code, 200 means success
+        #    data = response.json() #storing json content into data as a dictionary
+        #    print(data)
+        #else:
+        #    print("fail")
+
+
+        return True
+    else:
+        return False
 
 
 logger.debug("Create Headband Scanner")
