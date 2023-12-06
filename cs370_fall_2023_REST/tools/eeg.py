@@ -16,6 +16,7 @@ UserInfo = {
   "movie_play_data": [],
 }
 
+full_data = []
 
 def on_sensor_state_changed(sensor, state):
     logger.debug('Sensor {0} is {1}'.format(sensor.Name, state))
@@ -23,16 +24,8 @@ def on_sensor_state_changed(sensor, state):
 def on_brain_bit_signal_data_received(sensor, data):
     
     logger.debug(data)
-    working_string_data(data)
+    UserInfo["movie_play_data"].append(data) #add to the list of the UserInfo
    
-def working_string_data(data): 
-    #print("First part")
-    #for x in data:
-    one_data = re.split(", Brain", data)
-    one_data[0] = re.sub("\[", "(", one_data[0])
-    print(one_data[0])
-    UserInfo["movie_play_data"].append(one_data[0])
-
 def returnpswrd(username):
     with open("%s_data.pkl" % username, 'rb') as f:  #'testing_data_objects.pkl'
         userDict = pickle.load(f) # deserialize using load()
