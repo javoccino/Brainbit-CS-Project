@@ -89,9 +89,10 @@ def signup():
         username = request.form.get('username')
         password = request.form.get('password')
         rpassword = request.form.get('rpassword')
+        email = request.form.get('email')
 
-        print(username,password,rpassword)
-        check = store_signup(username,password, rpassword)
+        print(username,password,rpassword,email)
+        check = store_signup(username,password, rpassword,email)
         print(check)
         if check == True:
             session['username'] = username

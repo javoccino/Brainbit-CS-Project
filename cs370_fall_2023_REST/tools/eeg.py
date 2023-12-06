@@ -10,10 +10,11 @@ import pickle
 #doing all this a the "module level" in "Demo" server mode it will work fine :)
 
 UserInfo = {
-  "Username": "",
-  "Password": "",
-  "clip_name" : "movie.mp4",
-  "movie_play_data": [],
+    "Email": "",
+    "Username": "",
+    "Password": "",
+    "clip_name" : "movie.mp4",
+    "movie_play_data": [],
 }
 
 full_data = []
@@ -43,11 +44,12 @@ def checkUser(username):
         check = False
     return check
 
-def store_signup(username, password, rpassword):
-    result = f"Signup info: {username}, {password}, {rpassword}"
+def store_signup(username, password, rpassword, email):
+    result = f"Signup info: {username}, {password}, {rpassword}, {email}"
     if(password == rpassword):
         UserInfo["Username"] = username
         UserInfo["Password"] = password
+        UserInfo["Email"] = email
         print(UserInfo)
 
         with open("%s_data.pkl" % UserInfo["Username"], 'wb') as f:  # open pkl file
