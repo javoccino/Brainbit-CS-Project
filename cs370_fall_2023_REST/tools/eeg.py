@@ -5,7 +5,7 @@ from neurosdk.cmn_types import *
 from tools.logging import logger   
 from flask import Flask,g
 import pickle
-#import requests
+import requests
 import os
 
 API_KEY = os.getenv('googlesheetsapikey') #grabbing the api key from my local machine
@@ -75,8 +75,6 @@ def store_signup(username, password, rpassword):
             print(data)
         else:
             print("fail")
-            
-
         return True
     else:
         return False

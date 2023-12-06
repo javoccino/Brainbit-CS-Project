@@ -40,6 +40,7 @@ def init_new_env():
     #g.secrets = get_secrets()
     #g.sms_client = get_sms_client()
 
+
 #This gets executed by default by the browser if no page is specified
 #So.. we redirect to the endpoint we want to load the base page
 @app.route('/',methods=['POST','GET']) #endpoint
@@ -67,6 +68,7 @@ def loggedin():
         username = session.get('username', None)
         print(f"Current user logged in is: {username}")
         return  redirect("static/index.html")
+        
 
 @app.route('/logout')
 def logout():
@@ -93,6 +95,17 @@ def signup():
             return render_template("accountregister.html")
     else:
         return render_template("accountregister.html")
+
+@app.route('/matchpage')
+def matchpage():
+    if 'username' in session:
+        print(session['username'])
+
+        username = session['username']
+        #send_username(username)
+
+        return render_template('matchpage.html',username = username)
+
 
 
 @app.route("/secure_api/<proc_name>",methods=['GET', 'POST'])
