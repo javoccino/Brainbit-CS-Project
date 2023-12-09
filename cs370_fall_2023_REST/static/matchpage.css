@@ -13,19 +13,19 @@
 }
 
 dt{
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     margin-left: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+}
 }
 
 dd{
-    margin-bottom: 45px;
+    margin-bottom: 20px;
     margin-left:30px;
 }
 
-.matches{
-    background-color: skyblue;
-}
 
 body{
-    background-color: skyblue;
+    background-color: lightsalmon;
 }
