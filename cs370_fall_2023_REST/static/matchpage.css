@@ -18,7 +18,6 @@ dt{
     font-weight: bold;
     text-decoration: underline;
 }
-}
 
 dd{
     margin-bottom: 20px;
@@ -28,4 +27,9 @@ dd{
 
 body{
     background-color: lightsalmon;
+}
+
+.matchEntry{
+    background-color: tomato;
+    font-size: 30px;
 }
