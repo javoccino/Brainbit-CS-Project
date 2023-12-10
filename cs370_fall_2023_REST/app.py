@@ -110,8 +110,11 @@ def matchpage():
 
         username = session['username']
         #send_username(username)
-        print(compare_data(username))
+        #print(compare_data(username))
         
+        list = compare_data(username)
+        print(list)
+        print(len(list))
 
         #for item in matching_list:
          #   print(item)
@@ -119,7 +122,7 @@ def matchpage():
 
             
         
-        return render_template('matchpage.html',username = username)
+        return render_template('matchpage.html',username = username, len = len(list), list = list, count = 0)
 
 @app.route("/secure_api/<proc_name>",methods=['GET', 'POST'])
 @token_required

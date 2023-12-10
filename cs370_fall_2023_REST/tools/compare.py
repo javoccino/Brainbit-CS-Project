@@ -111,6 +111,8 @@ def compare_data(username):
                     new_two_data = pickle.load(f) # deserialize using load()
                     two_data_set = new_two_data["movie_play_data"]
                     two_data_username = new_two_data["Username"]
+                    two_data_set_email = new_two_data["Email"]
+                    
                     #name
                     for y in two_data_set:      #go thorugh user data list   x
                         #list_two.append(parse(y))   #parse data list to clean data go we only have numbers   x
@@ -127,36 +129,15 @@ def compare_data(username):
 #                    print(x)
 #                    print(list_two)
                     print("len: " + str(len(list_two)))
+                    #print(two_data_set_email)
                     print("-------------------------------------------")
             
                 #compare Login user data to the other user data
-#                len_1 = len(list_one)   #geting lenth of data of login user
-#                len_2 = len(list_two)
-#                index = 0
-#                if(len_1 > len_2):
-#                     index = len_2
-#                elif(len_1 < len_2):
-#                     index = len_1
-#                else:
-#                     index = len_1
-#                count = 0
-#                while count < index:
-                    # Calculate the Euclidean distance  
-                    # between points P and Q 
-#                    distance_ans_per_data = math.dist(list_one[count], list_two[count]) 
-                    #print(distance_ans_per_data) 
-#                    list_distance_avg_ans_per_user.append(distance_ans_per_data)
-#                    count+=1
-
                 for (a,b) in zip(list_one, list_two):
                     # Calculate the Euclidean distance  
                     # between points P and Q 
-                    #print(list_one[a])
-                    #print(list_two[b])
-#                    distance_ans_per_data = math.dist(list_one[count], list_two[count])
                     distance_ans_per_data = math.dist(a, b)
                     list_distance_avg_ans_per_user.append(distance_ans_per_data) 
-#                    count+=1
                 
 #                print(list_distance_avg_ans_per_user)
                 #get the avg of all distance formula ans
@@ -167,13 +148,15 @@ def compare_data(username):
                 list_two.clear()
                 list_distance_avg_ans_per_user.clear()
 
-                second_list = [two_data_username, avg_login_dif_user]
+                second_list = [two_data_username, avg_login_dif_user, two_data_set_email]
                 username_average.append(second_list)
+    
 
     print("\nList separated:")
     #print(list_one)
     #print(list_two)
     print(username_average)
-    #return username_average
+    #return tuple(username_average)
+    return username_average
 
 #compare_data()
