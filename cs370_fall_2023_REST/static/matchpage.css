@@ -1,0 +1,35 @@
+.header{
+    font-family: 'BloggerSansLightItalic';
+    font-weight: normal;
+    font-style: italic;
+    margin:auto;
+    text-align: center;
+    padding: 50px;
+    border: 8px crimson;
+    border-style:solid;
+    border-radius: 8px;
+    background-color: crimson;
+    color:white;
+}
+
+dt{
+    margin-bottom: 5px;
+    margin-left: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+dd{
+    margin-bottom: 20px;
+    margin-left:30px;
+}
+
+
+body{
+    background-color: lightsalmon;
+}
+
+.matchEntry{
+    background-color: tomato;
+    font-size: 30px;
+}
