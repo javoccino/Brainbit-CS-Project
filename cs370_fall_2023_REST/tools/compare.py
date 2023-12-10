@@ -10,8 +10,7 @@ username_average = []
 #to get the current working directory
 directory = os.getcwd()
 
-print(directory)#+ "\cs370_fall_2023_REST")
-#directory += "\cs370_fall_2023_REST"
+print(directory)
 
 # list to store files
 res = []
@@ -65,47 +64,36 @@ def compare_data(username):
     #save all parse data save as float numbers for login user
     list_one = []
 
-    #logger.debug("debug" + username)
-
     #plan to use one list to have another user data to then compare avarege the distance 
-    #formula meaning after get the avg of current user to potiential parthner next partthner wil use this list to compare
+    #formula meaning after get the avg of current user to potential parthner next partner will use this list to compare
     list_two = []
 
     #collect all the distance answers btw LoginUser and other users to then avg out all ans in the list
     list_distance_avg_ans_per_user = []
 
-    #make the actual login user this open pickel part 
-    with open(directory + "\\" + "%s_data.pkl" % username, 'rb') as f:       #"BOB_data.pkl"  #%s_data.pkl" % UserInfo["Username"]
+    #make the actual login user open pickle part 
+    with open(directory + "\\" + "%s_data.pkl" % username, 'rb') as f:       
         new_one_data = pickle.load(f) # deserialize using load()
         one_data_set = new_one_data["movie_play_data"]
         for x in one_data_set:
-                #list_one.append(parse(x[0]))
                 first = ""
-#                print("\nanother forloop\n")
                 for i in range(len(x)):
                       if i % 2 == 0:
-                            #print(x[i])
                             first = x[i]
-                            #print("SAVED STRING: ")
-#                            print(first)
                             list_one.append(parse(str(first)))
 
         print("------------------MAIN - -----------------------" )
-#        print(list_one[764])
+
         print("len: " + str(len(list_one)))
-#        print(list_one[0])
+
         print("------------------------------------------------------------------/n")
-        
-    #must do some type of function to for loop through all the data 
-    #ideas
-    #through name, a number session, a number id type, 
 
     #go though all pkl file expect login user to
     #get their brian bit data list to then
-    #compre login user and other user data using the distance formula
+    #compare login user and other user data using the distance formula
     for x in res:
           #going through all the pkl files expect user
-          if (directory + "\\" + x != directory + "\\" + "%s_data.pkl" % username):   #%s_data.pkl" % UserInfo["Username"]
+          if (directory + "\\" + x != directory + "\\" + "%s_data.pkl" % username):   
                 print("---------------------%s----------------------" % x)
                 with open(directory + "\\" + x, 'rb') as f:       #other user data files
                     new_two_data = pickle.load(f) # deserialize using load()
@@ -113,21 +101,13 @@ def compare_data(username):
                     two_data_username = new_two_data["Username"]
                     two_data_set_email = new_two_data["Email"]
                     
-                    #name
-                    for y in two_data_set:      #go thorugh user data list   x
-                        #list_two.append(parse(y))   #parse data list to clean data go we only have numbers   x
+                    for y in two_data_set:      #go thorugh user data list   
+                        #parse data list to clean data so we only have numbers   x
                         first = ""
-#                        print("\nanother forloop\n")
                         for i in range(len(y)):
                             if i % 2 == 0:
-                                    #print(x[i])
                                     first = y[i]
-#                                    print("SAVED STRING: ")
-#                                    print(first)
                                     list_two.append(parse(str(first)))
-#                    print("---------------------%s----------------------" % x)
-#                    print(x)
-#                    print(list_two)
                     print("len: " + str(len(list_two)))
                     #print(two_data_set_email)
                     print("-------------------------------------------")
@@ -135,14 +115,14 @@ def compare_data(username):
                 #compare Login user data to the other user data
                 for (a,b) in zip(list_one, list_two):
                     # Calculate the Euclidean distance  
-                    # between points P and Q 
+                    # between points a and b
+                    # for clear explanation, comparing each packet number with logined user with other users
                     distance_ans_per_data = math.dist(a, b)
                     list_distance_avg_ans_per_user.append(distance_ans_per_data) 
                 
-#                print(list_distance_avg_ans_per_user)
                 #get the avg of all distance formula ans
                 #here transfer to Matchmaking page
-                #transfer user name, the AVG, and email(if needed) to html webpage
+                #transfer user name, the AVG, and email(if needed) to html webpage/jinja
                 avg_login_dif_user = Average(list_distance_avg_ans_per_user) 
                 print("Total avg: " + str(avg_login_dif_user) + "\n")
                 list_two.clear()
@@ -151,12 +131,7 @@ def compare_data(username):
                 second_list = [two_data_username, avg_login_dif_user, two_data_set_email]
                 username_average.append(second_list)
     
-
     print("\nList separated:")
-    #print(list_one)
-    #print(list_two)
     print(username_average)
-    #return tuple(username_average)
-    return username_average
 
-#compare_data()
+    return username_average

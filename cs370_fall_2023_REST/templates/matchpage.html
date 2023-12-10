@@ -10,7 +10,7 @@
         <button type="button" onclick="location.href='/logout'">LOGOUT</button>
         <div class = 'header'>
         <h1> 🧠 Hi {{ username }}!Your brain matches are below! 🔥</h1>
-        <h2> Brain score indicates closeness to your own brain</h2>
+        <h2> Brain accuracy indicates closeness to your own brain</h2>
         <h2> The closer the score is to 0.00, the better your match!</h2>
         </div>
         <div class = 'matches'>
@@ -26,29 +26,6 @@
                     </dd>
                 </div>
                 {% endfor %}
-                <!--<div class = 'matchEntry'> 
-                    <dt>John Doe</dt>
-                    <dd>Email: jdoe@hotmail.com, Age: 43 </br>
-                    <a href = "mailto:test@gmail.com?Subject=This%20is%20a%20test&body=TESTING%20EMAIL%20FUNCTION.">
-                        click here to send an email!
-                    </a>
-                    </dd>
-
-                </div>
-                <div class = 'matchEntry'>
-                    <dt></dt>
-                    <dd>Email: itsjane@outlook.com, Age:36 </br>
-                    <a href = "mailto:test@gmail.com?Subject=This%20is%20a%20test&body=TESTING%20EMAIL%20FUNCTION.">
-                        click here to send an email! 
-                    </a></dd>
-                </div> 
-            -->
-           <!-- <ol> 
-                 For loop logic of jinja template 
-                {% for i in range(0, len) %} 
-                    <li>{{ list[i] }}</li> 
-                {% endfor %} 
-                </ol> -->
             </dl>
         </div>
     </body>
