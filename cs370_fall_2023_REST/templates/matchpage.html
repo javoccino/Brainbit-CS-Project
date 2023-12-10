@@ -10,8 +10,8 @@
         <button type="button" onclick="location.href='/logout'">LOGOUT</button>
         <div class = 'header'>
         <h1> 🧠 Hi {{ username }}!Your brain matches are below! 🔥</h1>
-        <h4> Brain score indicates closeness to your own brain</h4>
-        <h4> The closer the score is to 0, the better your match!</h4>
+        <h2> Brain score indicates closeness to your own brain</h2>
+        <h2> The closer the score is to 0.00, the better your match!</h2>
         </div>
         <div class = 'matches'>
             <dl>
@@ -20,7 +20,7 @@
                     <dt>{{ list[i][0] }}</dt>
                     <dd>Accuracy: {{ list[i][1] }}
                     <dd>Email: {{ list[i][2] }} 
-                    <a href = "mailto:test@gmail.com?Subject=This%20is%20a%20test&body=TESTING%20EMAIL%20FUNCTION.">
+                    <a href = "mailto:{{ list[i][2] }}?Subject=Got%20a%20brain?&body=Meet%20your%20other%20brain.">
                         click here to send an email!
                     </a>
                     </dd>
