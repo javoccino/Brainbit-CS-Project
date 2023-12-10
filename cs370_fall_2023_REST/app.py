@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request, redirect, url_for, g, session
 from flask_json import FlaskJSON, JsonError, json_response, as_json
 from tools.eeg import store_signup,  returnpswrd ,checkUser
+from tools.compare import compare_data
 import jwt
 
 import sys
@@ -109,7 +110,15 @@ def matchpage():
 
         username = session['username']
         #send_username(username)
+        print(compare_data(username))
+        
 
+        #for item in matching_list:
+         #   print(item)
+            
+
+            
+        
         return render_template('matchpage.html',username = username)
 
 @app.route("/secure_api/<proc_name>",methods=['GET', 'POST'])

@@ -3,14 +3,15 @@ import re
 import os
 import math
 import itertools 
-#from eeg import UserInfo
+from tools.eeg import UserInfo
+from tools.logging import logger
 
-four_avg = []
+username_average = []
 #to get the current working directory
 directory = os.getcwd()
 
-print(directory + "\cs370_fall_2023_REST")
-directory += "\cs370_fall_2023_REST"
+print(directory)#+ "\cs370_fall_2023_REST")
+#directory += "\cs370_fall_2023_REST"
 
 # list to store files
 res = []
@@ -21,6 +22,7 @@ for file in os.listdir(directory):
         res.append(file)
 print("RES:")
 print(res)
+print(directory + "\\" + "%s_data.pkl" % UserInfo["Username"])
 
 print("\n--------------COMPARING DATA---------------------\n")
 
@@ -59,9 +61,11 @@ def Average(lst):
     return sum(lst) / len(lst) 
 
 #note in the for loop below two thing at time
-def compare_data():
+def compare_data(username):
     #save all parse data save as float numbers for login user
     list_one = []
+
+    #logger.debug("debug" + username)
 
     #plan to use one list to have another user data to then compare avarege the distance 
     #formula meaning after get the avg of current user to potiential parthner next partthner wil use this list to compare
@@ -71,7 +75,7 @@ def compare_data():
     list_distance_avg_ans_per_user = []
 
     #make the actual login user this open pickel part 
-    with open(directory + "\Lyle_data.pkl", 'rb') as f:       #"BOB_data.pkl"  #%s_data.pkl" % UserInfo["Username"]
+    with open(directory + "\\" + "%s_data.pkl" % username, 'rb') as f:       #"BOB_data.pkl"  #%s_data.pkl" % UserInfo["Username"]
         new_one_data = pickle.load(f) # deserialize using load()
         one_data_set = new_one_data["movie_play_data"]
         for x in one_data_set:
@@ -101,11 +105,12 @@ def compare_data():
     #compre login user and other user data using the distance formula
     for x in res:
           #going through all the pkl files expect user
-          if (directory + "\\" + x != directory + "\Lyle_data.pkl"):   #%s_data.pkl" % UserInfo["Username"]
+          if (directory + "\\" + x != directory + "\\" + "%s_data.pkl" % username):   #%s_data.pkl" % UserInfo["Username"]
                 print("---------------------%s----------------------" % x)
                 with open(directory + "\\" + x, 'rb') as f:       #other user data files
                     new_two_data = pickle.load(f) # deserialize using load()
                     two_data_set = new_two_data["movie_play_data"]
+                    two_data_username = new_two_data["Username"]
                     #name
                     for y in two_data_set:      #go thorugh user data list   x
                         #list_two.append(parse(y))   #parse data list to clean data go we only have numbers   x
@@ -162,12 +167,13 @@ def compare_data():
                 list_two.clear()
                 list_distance_avg_ans_per_user.clear()
 
-                four_avg.append(avg_login_dif_user)
-                    
+                second_list = [two_data_username, avg_login_dif_user]
+                username_average.append(second_list)
 
     print("\nList separated:")
     #print(list_one)
     #print(list_two)
-    print(four_avg)
+    print(username_average)
+    #return username_average
 
-compare_data()
+#compare_data()
