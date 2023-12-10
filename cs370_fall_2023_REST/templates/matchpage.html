@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang = en>
+    <head>
+        <title> Your Brain Matches!!!</title>
+        <meta charset = "utf-8">
+        <link rel = "stylesheet" href = "{{ url_for('static', filename = 'matchpage.css') }}" >
+        <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/blogger-sans-light-italic-otf" type="text/css"/>
+    </head>
+    <body>
+        <button type="button" onclick="location.href='/logout'">LOGOUT</button>
+        <div class = 'header'>
+        <h1> 🧠 Hi {{ username }}!Your brain matches are below! 🔥</h1>
+        <h4> Brain score indicates closeness to your own brain</h4>
+        <h4> The closer the score is to 0, the better your match!</h4>
+        </div>
+        <div class = 'matches'>
+            <dl>
+                <div class = 'matchEntry'>
+                    <dt>Example Person</dt>
+                    <dd>Email: example@gmail.com, Age: 24 </br>
+                    <a href = "mailto:test@gmail.com?Subject=This%20is%20a%20test&body=TESTING%20EMAIL%20FUNCTION.">
+                        click here to send an email!
+                    </a>
+                    </dd>
+                </div>
+                <div class = 'matchEntry'> 
+                    <dt>John Doe</dt>
+                    <dd>Email: jdoe@hotmail.com, Age: 43 </br>
+                    <a href = "mailto:test@gmail.com?Subject=This%20is%20a%20test&body=TESTING%20EMAIL%20FUNCTION.">
+                        click here to send an email!
+                    </a>
+                    </dd>
+
+                </div>
+                <div class = 'matchEntry'>
+                    <dt>Jane Doe</dt>
+                    <dd>Email: itsjane@outlook.com, Age:36 </br>
+                    <a href = "mailto:test@gmail.com?Subject=This%20is%20a%20test&body=TESTING%20EMAIL%20FUNCTION.">
+                        click here to send an email!
+                    </a></dd>
+                </div>
+            </dl>
+        </div>
+    </body>
+</html>

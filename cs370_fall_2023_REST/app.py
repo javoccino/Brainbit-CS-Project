@@ -102,6 +102,15 @@ def signup():
     else:
         return render_template("accountregister.html")
 
+@app.route('/matchpage')
+def matchpage():
+    if 'username' in session:
+        print(session['username'])
+
+        username = session['username']
+        #send_username(username)
+
+        return render_template('matchpage.html',username = username)
 
 @app.route("/secure_api/<proc_name>",methods=['GET', 'POST'])
 @token_required
