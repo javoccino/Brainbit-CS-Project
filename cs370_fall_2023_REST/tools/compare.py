@@ -3,6 +3,7 @@ import re
 import os
 import math
 import itertools 
+from tools.eeg import UserInfo
 
 four_avg = []
 #to get the current working directory
@@ -68,7 +69,7 @@ def compare_data():
     list_distance_avg_ans_per_user = []
 
     #make the actual login user this open pickel part 
-    with open("Lyle_data(2).pkl", 'rb') as f:       #"BOB_data.pkl"  #%s_data.pkl" % UserInfo["Username"]
+    with open("%s_data.pkl" % UserInfo["Username"], 'rb') as f:       #"BOB_data.pkl"  #%s_data.pkl" % UserInfo["Username"]
         new_one_data = pickle.load(f) # deserialize using load()
         one_data_set = new_one_data["movie_play_data"]
         for x in one_data_set:
@@ -83,7 +84,7 @@ def compare_data():
 #                            print(first)
                             list_one.append(parse(str(first)))
 
-        print("------------------MAIN - Lyle_data(2).pkl -----------------------" ) #%s_data.pkl #% UserInfo["Username"]
+        print("------------------MAIN - %s_data.pkl-----------------------" % UserInfo["Username"])
 #        print(list_one[764])
         print("len: " + str(len(list_one)))
 #        print(list_one[0])
@@ -98,7 +99,7 @@ def compare_data():
     #compre login user and other user data using the distance formula
     for x in res:
           #going through all the pkl files expect user
-          if (x != "Lyle_data(2).pkl"):   #%s_data.pkl" % UserInfo["Username"]
+          if (x != "%s_data.pkl" % UserInfo["Username"]):   #%s_data.pkl" % UserInfo["Username"]
                 print("---------------------%s----------------------" % x)
                 with open(x, 'rb') as f:       #other user data files
                     new_two_data = pickle.load(f) # deserialize using load()
