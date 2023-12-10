@@ -62,15 +62,6 @@ def store_signup(username, password, rpassword, email):
             one_data = pickle.load(f) # deserialize using load()
             print(one_data) # print student names
 
-        #response = requests.get(url) #stores the Response information from the get request into response
-        #print(response)
-        #if response.status_code == 200: #.status_code grabs response code, 200 means success
-        #    data = response.json() #storing json content into data as a dictionary
-        #    print(data)
-        #else:
-        #    print("fail")
-
-
         return True
     else:
         return False

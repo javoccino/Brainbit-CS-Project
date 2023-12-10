@@ -9,6 +9,9 @@ import datetime
 import bcrypt
 import traceback
 
+import requests
+import os
+
 from tools.eeg import get_head_band_sensor_object
 
 
@@ -23,6 +26,12 @@ from tools.logging import logger
 
 ERROR_MSG = "Ooops.. Didn't work!"
 
+API_KEY = os.getenv('googlesheetsapikey') #grabbing the api key from my local machine
+sheet_id = "1a3e1r-aGk1SbDKgs3wYYR_Mjc3OQ-hkEVl47Ll3uqIg" #id of the sheet grabbed from url to create url api call
+range = 'Responses!A1:D100' #sheetname following by ranges to be displayed
+
+#creating the url with sheet_id, range, and apikey to access the sheet that holds all the survey data to be called using request
+url = f'https://sheets.googleapis.com/v4/spreadsheets/{sheet_id}/values/{range}?key={API_KEY}'
 
 #Create our app
 app = Flask(__name__)
@@ -74,6 +83,7 @@ def loggedin():
     if 'username' in session:
         username = session.get('username', None)
         print(f"Current user logged in is: {username}")
+
         return  redirect("static/index.html")
 
 @app.route('/logout')
@@ -109,11 +119,21 @@ def matchpage():
         print(session['username'])
 
         username = session['username']
-        #send_username(username)
-        #print(compare_data(username))
+    
+        response = requests.get(url) #stores the Response information from the get request into response
+        print(response)
+        if response.status_code == 200: #.status_code grabs response code, 200 means success
+            data = response.json() #storing json content into data as a dictionary
+            print(data)
+            vals = data.get('values', [])  #storing the values field from the json repsonse into a list called vals
+            
+        else:
+            print("fail")
         
-        list = compare_data(username)
-        print(list)
+
+
+        list = compare_data(username, vals)
+        #print(list)
         print(len(list))
 
         #for item in matching_list:

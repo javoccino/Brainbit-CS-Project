@@ -60,7 +60,7 @@ def Average(lst):
     return sum(lst) / len(lst) 
 
 #note in the for loop below two thing at time
-def compare_data(username):
+def compare_data(username, surveyData):
     #save all parse data save as float numbers for login user
     list_one = []
 
@@ -70,6 +70,15 @@ def compare_data(username):
 
     #collect all the distance answers btw LoginUser and other users to then avg out all ans in the list
     list_distance_avg_ans_per_user = []
+
+    #holds username and age value from surveyData
+    usernames_and_ages = []
+
+    #stores username and age values from survey data into usernames_and_ages
+    for row in surveyData[1:]: #skips first row incase of header
+        if len(row) > 3: #avoids index error, makes sure data is there
+                usernames_and_ages.append((row[2],row[3])) #know age is always in index 2 of column and username is in index 3
+                #print(usernames_and_ages)
 
     #make the actual login user open pickle part 
     with open(directory + "\\" + "%s_data.pkl" % username, 'rb') as f:       
@@ -100,6 +109,14 @@ def compare_data(username):
                     two_data_set = new_two_data["movie_play_data"]
                     two_data_username = new_two_data["Username"]
                     two_data_set_email = new_two_data["Email"]
+                    two_data_age = ''
+
+                    for age, name in usernames_and_ages:
+                        if two_data_username == name:
+                              #print(name + " MATCH")
+                              two_data_age = age
+                    
+                        
                     
                     for y in two_data_set:      #go thorugh user data list   
                         #parse data list to clean data so we only have numbers   x
@@ -128,7 +145,7 @@ def compare_data(username):
                 list_two.clear()
                 list_distance_avg_ans_per_user.clear()
 
-                second_list = [two_data_username, avg_login_dif_user, two_data_set_email]
+                second_list = [two_data_username, avg_login_dif_user, two_data_set_email, two_data_age]
                 username_average.append(second_list)
     
     print("\nList separated:")
