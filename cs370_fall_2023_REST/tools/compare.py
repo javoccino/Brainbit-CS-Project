@@ -3,13 +3,14 @@ import re
 import os
 import math
 import itertools 
-from tools.eeg import UserInfo
+#from eeg import UserInfo
 
 four_avg = []
 #to get the current working directory
 directory = os.getcwd()
 
-print(directory)
+print(directory + "\cs370_fall_2023_REST")
+directory += "\cs370_fall_2023_REST"
 
 # list to store files
 res = []
@@ -18,6 +19,7 @@ for file in os.listdir(directory):
     # check only text files
     if file.endswith('.pkl'):
         res.append(file)
+print("RES:")
 print(res)
 
 print("\n--------------COMPARING DATA---------------------\n")
@@ -69,7 +71,7 @@ def compare_data():
     list_distance_avg_ans_per_user = []
 
     #make the actual login user this open pickel part 
-    with open("%s_data.pkl" % UserInfo["Username"], 'rb') as f:       #"BOB_data.pkl"  #%s_data.pkl" % UserInfo["Username"]
+    with open(directory + "\Lyle_data.pkl", 'rb') as f:       #"BOB_data.pkl"  #%s_data.pkl" % UserInfo["Username"]
         new_one_data = pickle.load(f) # deserialize using load()
         one_data_set = new_one_data["movie_play_data"]
         for x in one_data_set:
@@ -84,7 +86,7 @@ def compare_data():
 #                            print(first)
                             list_one.append(parse(str(first)))
 
-        print("------------------MAIN - %s_data.pkl-----------------------" % UserInfo["Username"])
+        print("------------------MAIN - -----------------------" )
 #        print(list_one[764])
         print("len: " + str(len(list_one)))
 #        print(list_one[0])
@@ -99,9 +101,9 @@ def compare_data():
     #compre login user and other user data using the distance formula
     for x in res:
           #going through all the pkl files expect user
-          if (x != "%s_data.pkl" % UserInfo["Username"]):   #%s_data.pkl" % UserInfo["Username"]
+          if (directory + "\\" + x != directory + "\Lyle_data.pkl"):   #%s_data.pkl" % UserInfo["Username"]
                 print("---------------------%s----------------------" % x)
-                with open(x, 'rb') as f:       #other user data files
+                with open(directory + "\\" + x, 'rb') as f:       #other user data files
                     new_two_data = pickle.load(f) # deserialize using load()
                     two_data_set = new_two_data["movie_play_data"]
                     #name
